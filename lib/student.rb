@@ -33,7 +33,7 @@ class Student
       INSERT INTO students (name, grade) VALUES (?, ?);
     SQL
 
-    bob = DB[:conn].execute(sql, name, grade)
+    bob = DB[:conn].execute(sql, @name, @grade)
     binding.pry
   end
 
