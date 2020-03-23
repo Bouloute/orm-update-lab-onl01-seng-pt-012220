@@ -62,7 +62,7 @@ class Student
     DB[:conn].execute(sql, name, grade_as_i)
   end
 
-  def grade_to_i(grade)
+  def self.grade_to_i(grade)
     grade.gsub("th", "").to_i
   end
 end
