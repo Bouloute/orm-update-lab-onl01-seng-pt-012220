@@ -37,11 +37,7 @@ class Student
 
     #if not exists, create
     else
-      sql = <<-SQL
-        INSERT INTO students (name, grade) VALUES (?, ?);
-      SQL
-
-      DB[:conn].execute(sql, @name, @grade)
+      self.self.create(@name, @grade)
 
       sql = <<-SQL
         SELECT last_insert_rowid() FROM students ;
