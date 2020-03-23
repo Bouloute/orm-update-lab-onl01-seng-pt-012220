@@ -29,17 +29,28 @@ class Student
   end
 
   def save
-    sql = <<-SQL
-      INSERT INTO students (name, grade) VALUES (?, ?);
-    SQL
+    #if exists already, update
+    if @id
+      sql = <<-SQL
+        UPDATE students SET name = ?, grade = ?;
+      SQL
 
-    DB[:conn].execute(sql, @name, @grade)
+      DB[:conn].execute(sql, @name, @grade)
 
-    sql = <<-SQL
-      SELECT last_insert_rowid() FROM students ;
-    SQL
+    #if not exists, create
+    else
+      sql = <<-SQL
+        INSERT INTO students (name, grade) VALUES (?, ?);
+      SQL
 
-    @id = DB[:conn].execute(sql)[0][0]
+      DB[:conn].execute(sql, @name, @grade)
+
+      sql = <<-SQL
+        SELECT last_insert_rowid() FROM students ;
+      SQL
+
+      @id = DB[:conn].execute(sql)[0][0]
+    end
   end
 
   def self.create
