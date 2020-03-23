@@ -29,6 +29,14 @@ class Student
     DB[:conn].execute(sql)
   end
 
+  def self.create(name, grade)
+    sql = <<-SQL
+      INSERT INTO students (name, grade) VALUES (?, ?);
+    SQL
+
+    DB[:conn].execute(sql, name, grade)
+  end
+
   def save
     #if exists already, update
     if @id
@@ -50,13 +58,6 @@ class Student
     end
   end
 
-  def self.create(name, grade)
-    sql = <<-SQL
-      INSERT INTO students (name, grade) VALUES (?, ?);
-    SQL
-
-    DB[:conn].execute(sql, name, grade)
-  end
 
   def self.new_from_db(row)
     binding.pry
