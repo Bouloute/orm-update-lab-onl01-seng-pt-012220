@@ -39,8 +39,7 @@ class Student
       SELECT id FROM students WHERE name = ?;
     SQL
 
-    id = DB[:conn].execute(sql, @name)
-    binding.pry
+    DB[:conn].execute(sql, @name)[0][0]
   end
 
   def self.create
