@@ -33,11 +33,7 @@ class Student
   def save
     #if exists already, update
     if @id
-      sql = <<-SQL
-        UPDATE students SET name = ?, grade = ?;
-      SQL
-
-      DB[:conn].execute(sql, @name, @grade)
+      self.update
 
     #if not exists, create
     else
