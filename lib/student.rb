@@ -4,9 +4,10 @@ class Student
   attr_accessor :name, :grade
   attr_reader :id
 
-  def initialize(name, grade)
+  def initialize(name, grade, id = nil)
     @name = name
     @grade = grade
+    @id = id
   end
 
   def self.create_table
@@ -63,6 +64,7 @@ class Student
   end
 
   def self.new_from_db(row)
+    self.new(row[1], row[2], row[0])
     binding.pry
   end
 end
