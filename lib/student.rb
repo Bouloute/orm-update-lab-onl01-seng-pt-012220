@@ -33,8 +33,13 @@ class Student
       INSERT INTO students (name, grade) VALUES (?, ?);
     SQL
 
-    bob = DB[:conn].execute(sql, @name, @grade)
-    binding.pry
+    DB[:conn].execute(sql, @name, @grade)
+
+    sql = <<-SQL
+      SELECT id FROM students WHERE name = ?;
+    SQL
+
+    DB[:conn].execute(sql, @name)
   end
 
   def self.create
