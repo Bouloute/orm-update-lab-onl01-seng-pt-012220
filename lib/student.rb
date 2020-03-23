@@ -59,7 +59,7 @@ class Student
       INSERT INTO students (name, grade) VALUES (?, ?);
     SQL
     grade_as_i = grade_to_i(grade)
-    DB[:conn].execute(sql, name, grade_as_i)
+    DB[:conn].execute(sql, name, grade)
   end
 
   def self.grade_to_i(grade)
