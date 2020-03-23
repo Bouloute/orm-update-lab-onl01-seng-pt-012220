@@ -34,6 +34,7 @@ class Student
     SQL
 
     bob = DB[:conn].execute(sql, @name, @grade)
+    binding.pry
   end
 
   def self.create
