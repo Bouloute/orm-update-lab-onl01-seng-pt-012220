@@ -54,6 +54,10 @@ class Student
     end
   end
 
+  def grade_to_i(grade)
+    grade.gsub("th", "").to_i
+  end
+
   def self.create(name, grade)
     sql = <<-SQL
       INSERT INTO students (name, grade) VALUES (?, ?);
@@ -62,7 +66,5 @@ class Student
     DB[:conn].execute(sql, name, grade_to_i(grade))
   end
 
-  def grade_to_i(grade)
-    grade.gsub("th", "").to_i
-  end
+
 end
